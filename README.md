@@ -532,3 +532,55 @@ in inheritance.
 in accordance with their intended usage. Don't go off leaving
 everything `public` (which is the default).
 
+
+Exception
+---------
+* Don't use exceptions for flow of control.
+
+    ```Ruby
+    # bad
+    begin
+      n / d
+    rescue ZeroDivisionError
+      puts 'Cannot divide by 0!'
+    end
+
+    # good
+    if d.zero?
+      puts 'Cannot divide by 0!'
+    else
+      n / d
+    end
+    ```
+
+* Avoid rescuing the `Exception` class.  This will trap signals and calls to
+  `exit`, requiring you to `kill -9` the process.
+
+    ```Ruby
+    # bad
+    begin
+      # calls to exit and kill signals will be caught (except kill -9)
+      exit
+    rescue Exception
+      puts "you didn't really want to exit, right?"
+      # exception handling
+    end
+
+    # good
+    begin
+      # a blind rescue rescues from StandardError, not Exception as many
+      # programmers assume.
+    rescue => e
+      # exception handling
+    end
+
+    # also good
+    begin
+      # an exception occurs here
+
+    rescue StandardError => e
+      # exception handling
+    end
+
+    ```
+    
