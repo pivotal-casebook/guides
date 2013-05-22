@@ -401,3 +401,51 @@ would happen if the current value happened to be `false`.)
   always use parentheses in the method invocation. For example, write
 `f((3 + 2) + 1)`.
 
+
+Naming
+------
+
+* Name identifiers in English.
+
+* Use `snake_case` for symbols, methods and variables.
+
+ * Use `CamelCase` for classes and modules.  (Keep acronyms like HTTP,
+  RFC, XML uppercase.)
+
+    ```Ruby
+    # bad
+    class Someclass
+      ...
+    end
+
+    class Some_Class
+      ...
+    end
+
+    class SomeXml
+      ...
+    end
+
+    # good
+    class SomeClass
+      ...
+    end
+
+    class SomeXML
+      ...
+    end
+    ```
+
+* Use `SCREAMING_SNAKE_CASE` for other constants.
+
+ * The names of predicate methods (methods that return a boolean value)
+  should end in a question mark.
+  (i.e. `Array#empty?`).
+
+* The names of potentially *dangerous* methods (i.e. methods that
+  modify `self` or the arguments, `exit!` (doesn't run the finalizers
+  like `exit` does), etc.) should end with an exclamation mark if
+  there exists a safe version of that *dangerous* method.
+
+
+  
