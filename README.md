@@ -409,7 +409,7 @@ Naming
 
 * Use `snake_case` for symbols, methods and variables.
 
- * Use `CamelCase` for classes and modules.  (Keep acronyms like HTTP,
+* Use `CamelCase` for classes and modules.  (Keep acronyms like HTTP,
   RFC, XML uppercase.)
 
     ```Ruby
@@ -438,7 +438,7 @@ Naming
 
 * Use `SCREAMING_SNAKE_CASE` for other constants.
 
- * The names of predicate methods (methods that return a boolean value)
+* The names of predicate methods (methods that return a boolean value)
   should end in a question mark.
   (i.e. `Array#empty?`).
 
