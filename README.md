@@ -448,4 +448,87 @@ Naming
   there exists a safe version of that *dangerous* method.
 
 
+
+Classes
+-------
+* Avoid the usage of class (`@@`) variables due to their "nasty" behavior
+in inheritance.
+
+    ```Ruby
+    class Parent
+      @@class_var = 'parent'
+
+      def self.print_class_var
+        puts @@class_var
+      end
+    end
+
+    class Child < Parent
+      @@class_var = 'child'
+    end
+
+    Parent.print_class_var # => will print "child"
+    ```
+
+    As you can see all the classes in a class hierarchy actually share one
+    class variable. Class instance variables should usually be preferred
+    over class variables.
+
+
+* Use `def self.method` to define singleton methods. This makes the code
+  easier to refactor since the class name is not repeated.
+
+    ```Ruby
+    class TestClass
+      # bad
+      def TestClass.some_method
+        # body omitted
+      end
+
+      # good
+      def self.some_other_method
+        # body omitted
+      end
+
+      # Also possible and convenient when you
+      # have to define many singleton methods.
+      class << self
+        def first_method
+          # body omitted
+        end
+
+        def second_method_etc
+          # body omitted
+        end
+      end
+    end
+    ```
   
+* Indent the `public`, `protected`, and `private` methods as much the
+  method definitions they apply to. Leave one blank line above the
+  visibility modifier
+  and one blank line below in order to emphasize that it applies to all
+  methods below it.
+
+    ```Ruby
+    class SomeClass
+      def public_method
+        # ...
+      end
+
+      private
+
+      def private_method
+        # ...
+      end
+
+      def another_private_method
+        # ...
+      end
+    end
+    ```
+  
+* Assign proper visibility levels to methods (`private`, `protected`)
+in accordance with their intended usage. Don't go off leaving
+everything `public` (which is the default).
+
