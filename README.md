@@ -635,4 +635,39 @@ Apply this rule only to arrays with two or more elements.
     # good
     hash = { one: 1, two: 2, three: 3 }
     ```
+    
+Strings
+-------
+
+* Prefer string interpolation instead of string concatenation:
+
+    ```Ruby
+    # bad
+    email_with_name = user.name + ' <' + user.email + '>'
+
+    # good
+    email_with_name = "#{user.name} <#{user.email}>"
+    ```
+
+* Consider padding string interpolation code with space. It more clearly sets the
+  code apart from the string.
+
+    ```Ruby
+    "#{ user.last_name }, #{ user.first_name }"
+    ```
+
+* Avoid using `String#+` when you need to construct large data chunks.
+  Instead, use `String#<<`. Concatenation mutates the string instance in-place
+  and is always faster than `String#+`, which creates a bunch of new string objects.
+
+    ```Ruby
+    # good and also fast
+    html = ''
+    html << '<h1>Page title</h1>'
+
+    paragraphs.each do |paragraph|
+      html << "<p>#{paragraph}</p>"
+    end
+    ```
+
      
