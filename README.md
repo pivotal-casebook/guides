@@ -670,4 +670,46 @@ Strings
     end
     ```
 
+Regular Expressions
+-------------------
      
+* Avoid using $1-9 as it can be hard to track what they contain. Named groups
+  can be used instead.
+
+    ```Ruby
+    # bad
+    /(regexp)/ =~ string
+    ...
+    process $1
+
+    # good
+    /(?<meaningful_var>regexp)/ =~ string
+    ...
+    process meaningful_var
+    ```
+
+* Character classes have only a few special characters you should care about:
+  `^`, `-`, `\`, `]`, so don't escape `.` or brackets in `[]`.
+
+* Be careful with `^` and `$` as they match start/end of line, not string endings.
+  If you want to match the whole string use: `\A` and `\z` (not to be
+  confused with `\Z` which is the equivalent of `/\n?\z/`).
+
+    ```Ruby
+    string = "some injection\nusername"
+    string[/^username$/]   # matches
+    string[/\Ausername\z/] # don't match
+    ```
+
+* Use `x` modifier for complex regexps. This makes them more readable and you
+  can add some useful comments. Just be careful as spaces are ignored.
+
+    ```Ruby
+    regexp = %r{
+      start         # some text
+      \s            # white space char
+      (group)       # first group
+      (?:alt1|alt2) # some alternation
+      end
+    }x
+    ```
