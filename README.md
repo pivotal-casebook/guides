@@ -584,3 +584,55 @@ Exception
 
     ```
     
+  Collections
+  -----------
+  
+* Prefer literal array and hash creation notation (unless you need to
+pass parameters to their constructors, that is).
+
+    ```Ruby
+    # bad
+    arr = Array.new
+    hash = Hash.new
+
+    # good
+    arr = []
+    hash = {}
+    ```
+
+* Prefer `%w` to the literal array syntax when you need an array of
+words(non-empty strings without spaces and special characters in them).
+Apply this rule only to arrays with two or more elements.
+
+    ```Ruby
+    # bad
+    STATES = ['draft', 'open', 'closed']
+
+    # good
+    STATES = %w(draft open closed)
+    ```
+
+* Use `Set` instead of `Array` when dealing with unique elements. `Set`
+  implements a collection of unordered values with no duplicates. This
+  is a hybrid of `Array`'s intuitive inter-operation facilities and
+  `Hash`'s fast lookup.
+
+* Use symbols instead of strings as hash keys
+
+    ````Ruby
+    # bad
+    hash = { "one" => 1, "two" => 2, "three" => 3 }
+    
+    # good
+    hash = { one: 1, two: 2, three: 3 }
+
+* Use the hash literal syntax when your hash keys are symbols.
+
+    ```Ruby
+    # bad
+    hash = { :one => 1, :two => 2, :three => 3 }
+
+    # good
+    hash = { one: 1, two: 2, three: 3 }
+    ```
+     
