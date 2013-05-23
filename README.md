@@ -1,6 +1,9 @@
 Ruby Styleguide
 ===============
 
+At the moment, almost everything in this guide is taken from these excellent guides - https://github.com/bbatsov/ruby-style-guide 
+and [Github style guide](https://github.com/styleguide/ruby).
+
 Coding Style
 ------------
 
