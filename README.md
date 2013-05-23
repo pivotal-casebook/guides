@@ -713,3 +713,43 @@ Regular Expressions
       end
     }x
     ```
+
+Percent Literals
+----------------
+
+* Use `%w` freely.
+
+* Use `%()` for single-line strings which require both interpolation
+  and embedded double-quotes. For multi-line strings, prefer heredocs.
+
+    ```Ruby
+    # bad (no interpolation needed)
+    %(<div class="text">Some text</div>)
+    # should be '<div class="text">Some text</div>'
+
+    # bad (no double-quotes)
+    %(This is #{quality} style)
+    # should be "This is #{quality} style"
+
+    # bad (multiple lines)
+    %(<div>\n<span class="big">#{exclamation}</span>\n</div>)
+    # should be a heredoc.
+
+    # good (requires interpolation, has quotes, single line)
+    %(<tr><td class="name">#{name}</td>)
+    ```
+
+* Use `%r` only for regular expressions matching *more than* one '/' character.
+
+    ```Ruby
+    # bad
+    %r(\s+)
+
+    # still bad
+    %r(^/(.*)$)
+    # should be /^\/(.*)$/
+
+    # good
+    %r(^/blog/2011/(.*)$)
+    ```
+
